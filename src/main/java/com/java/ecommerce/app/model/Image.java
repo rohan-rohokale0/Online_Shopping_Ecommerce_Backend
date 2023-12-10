@@ -26,14 +26,14 @@ public class Image {
     @Column(name = "type")
     private String type;
 
+    @Lob
     //image bytes can have large lengths so we specify a value
     //which is more than the default length for picByte column
-    @Column(name = "pic_byte", length = 1000)
+    @Column(name = "pic_byte", columnDefinition = "LONGBLOB")
     private byte[] picByte;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private Category category;
+   @Column(name="category_id")
+   private Long categoryId;
 
     public Long getId() {
         return id;
@@ -67,11 +67,11 @@ public class Image {
         this.picByte = picByte;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }
